@@ -1,0 +1,31 @@
+body {
+    background: linear-gradient(to right, #a8d8ff, #5d8fd6, #1e3a8a);
+}
+
+
+.login-card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.login-left {
+    background-image: url('../img/cao_img.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.custom-login-width {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.login-card {
+    border-radius: 15px;
+    overflow: hidden;
+    min-height: 600px; /* Adjust as needed */
+}
+
+.custom-register-width {
+    max-width: 500px;
+    width: 100%;
+}
