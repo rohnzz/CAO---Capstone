@@ -47,12 +47,19 @@ public function processLogin(Request $request){
 $request->validate([
 'email' => 'required|email',
 'password' => 'required',
+'role' => 'required|string',
 
 ]);
 
 if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-$request->session()->regenerate();
-return redirect()->route('dashboard')->with('success', 'Welcome back!');
+    $request->session()->regenerate();
+    $user = Auth::user();
+    if ($user->role === $request->role) {
+        return redirect()->route('dashboard')->with('success', 'Welcome back!');
+    } else {
+        Auth::logout();
+        return back()->with('failed', 'Selected role does not match your account role.');
+    }
 }
 
 return back()->with('failed', 'Invalid login credentials.');

@@ -43,13 +43,17 @@ Route::get('/register', [AuthController::class, 'ShowRegistration'] )->name('aut
 Route::post('/register', [AuthController::class, 'processRegistration'] )->name('registerUser');
 
  
-Route::resource('/admin-dashboard', AdminController::class);
+// Remove or comment out the old admin-dashboard routes
+// Route::resource('/admin-dashboard', AdminController::class);
+// Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin-dashboard.index');
 
+// Add a single dashboard route for all roles
+// Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/showUser', [UserReportController::class, 'showUsers'] )->name('showUsers');
 Route::get('/showStudent', [StudentProfileController::class, 'showStudents'] )->name('showStudents');
-
-Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin-dashboard.index');
 
 Route::resource('clubs', ClubController::class);
 
@@ -62,5 +66,6 @@ Route::resource('announcements', AnnouncementController::class);
 
 Route::resource('member-applications', MemberApplicationController::class)->except(['show', 'edit']);
 
-Route::get('dashboard', Dashboard::class)->name('dashboard');
+// Comment out any other dashboard routes except the one using DashboardController
+// Route::get('dashboard', Dashboard::class)->name('dashboard');
 Route::get('tables', Tables::class, 'index')->name('Club-directory');

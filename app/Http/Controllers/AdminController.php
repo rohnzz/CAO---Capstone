@@ -11,16 +11,23 @@ class AdminController extends Controller
 //
 
 public function index()
-    {
-        // Fetch user info using getUserName method
-        $userName = $this->getUserName();
-        
-        // Count total users
-        $totalUsers = User::count();
-
-        // Pass the data to the view
-        return view('admin.dashboard', compact('userName', 'totalUsers'));
+{
+    if (!Auth::check()) {
+        return redirect()->route('login');
     }
+
+    $userName = $this->getUserName();
+    $totalUsers = User::count();
+    $role = Auth::user()->role ?? null;
+
+    if ($role === 'superadmin') {
+        return view('dashboard.superadmin_dashboard', compact('userName', 'totalUsers'));
+    } elseif ($role === 'admin') {
+        return view('dashboard.admin_dashboard', compact('userName', 'totalUsers'));
+    } else {
+        abort(403, 'Unauthorized');
+    }
+}
 
     // Method to fetch logged-in user's name or a default message
     private function getUserName(): string

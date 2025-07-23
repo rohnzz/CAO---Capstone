@@ -4,7 +4,7 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('admin-dashboard.index') }} ">
+            <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('dashboard') }} ">
                 <img src="{{ asset('assets') }}/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
                 <span class="ms-2 font-weight-bold text-white">Material Dashboard 2 Laravel Livewire</span>
             </a>
@@ -38,7 +38,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
-                    href="{{ route('admin-dashboard.index') }}">
+                    href="{{ route('dashboard') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
@@ -93,7 +93,27 @@
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
             </li>
-            
+            @php
+                $role = Auth::user()->role ?? null;
+            @endphp
+            @if($role === 'superadmin')
+                <!-- Superadmin-only sidebar items -->
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="material-icons">star</i>
+                        <span class="nav-link-text ms-1">Superadmin Feature</span>
+                    </a>
+                </li>
+            @endif
+            @if($role === 'admin')
+                <!-- Admin-only sidebar items -->
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="material-icons">admin_panel_settings</i>
+                        <span class="nav-link-text ms-1">Admin Feature</span>
+                    </a>
+                </li>
+            @endif
         </ul>
     </div>
 

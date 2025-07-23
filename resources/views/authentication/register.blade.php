@@ -55,8 +55,8 @@
                     <div class="mb-3">
                         <select class="form-control" name="role" required>
                             <option value="" disabled selected>Select Role</option>
-                            <option value="Admin">Superadmin</option>
-                            <option value="User">Admin</option>
+                            <option value="superadmin">Superadmin</option>
+                            <option value="admin">Admin</option>
                         </select>
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-3">

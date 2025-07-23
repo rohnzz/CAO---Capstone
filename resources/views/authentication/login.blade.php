@@ -36,12 +36,18 @@
                     @csrf
 
                     <div class="mb-3">
+                        <select name="role" id="role" class="form-control" required>
+                            <option value="superadmin">Superadmin</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email" required>
                     </div>
                     <div class="mb-3">
                         <input type="password" name="password" class="form-control" placeholder="Password" required>
                     </div>
-
+                    
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="remember" id="remember">
