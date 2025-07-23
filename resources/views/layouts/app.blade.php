@@ -29,7 +29,13 @@
         <div class="virtual-reality">
             <x-navbars.navs.auth />
             <div class="border-radius-xl mx-2 mx-md-3 position-relative" style="background-image: url('{{ asset('assets/img/vr-bg.jpg') }}'); background-size: cover;">
-                <x-navbars.sidebar />
+                @if(auth()->check() && auth()->user()->role === 'superadmin')
+                    <x-navbars.superadmin_sidebar />
+                @elseif(auth()->check() && auth()->user()->role === 'admin')
+                    <x-navbars.admin_sidebar />
+                @else
+                    <x-navbars.sidebar />
+                @endif
                 <main class="main-content border-radius-lg h-100">
                     @yield('page-content')
                 </main>
@@ -39,7 +45,13 @@
         </div>
 
     @else
-        <x-navbars.sidebar />
+        @if(auth()->check() && auth()->user()->role === 'superadmin')
+            <x-navbars.superadmin_sidebar />
+        @elseif(auth()->check() && auth()->user()->role === 'admin')
+            <x-navbars.admin_sidebar />
+        @else
+            <x-navbars.sidebar />
+        @endif
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
             <x-navbars.navs.auth />
             @yield('page-content')
