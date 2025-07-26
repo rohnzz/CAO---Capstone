@@ -34,7 +34,7 @@
                 @elseif(auth()->check() && auth()->user()->role === 'admin')
                     <x-navbars.admin_sidebar />
                 @else
-                    <x-navbars.sidebar />
+                    @include('partials.sidebar')
                 @endif
                 <main class="main-content border-radius-lg h-100">
                     @yield('page-content')
@@ -50,7 +50,7 @@
         @elseif(auth()->check() && auth()->user()->role === 'admin')
             <x-navbars.admin_sidebar />
         @else
-            <x-navbars.sidebar />
+            @include('partials.sidebar')
         @endif
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
             <x-navbars.navs.auth />
